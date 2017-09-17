@@ -1,0 +1,40 @@
+html
+  head
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js')
+
+      script(type='text/javascript').
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function (position) {
+                  var latLng = {
+                      lat: position.coords.latitude,
+                      lng: position.coords.longitude
+                  };
+                  console.debug(position.coords.latitude);
+                  return position.coords.latitude;
+              }, function () {
+                  geolocationErrorOccurred(true, popup, geolocationMap.getCenter());
+              });
+          }
+
+  body
+    div
+      div
+        nav.navbar.navbar-inverse(role='navigation', style='padding-left:130px;')
+          ul.nav.navbar-nav
+            li.active
+              a(href='/profile') Home
+              span.sr-only (current)
+            li
+              a(href='/about')
+                | About
+            li
+              a(href='/contact') Contact us
+
+      br
+      .jumbotron
+        p
+          | You are subscribed to the group!
+

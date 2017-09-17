@@ -1,0 +1,49 @@
+html
+  head
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+      link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.5/leaflet.css')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js')
+      script(src='https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24')
+      script(type='text/javascript').
+          navigator.geolocation.getCurrentPosition(function (position) {
+              var latLng = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude
+              };
+
+              console.debug(latLng)
+              return latLng;
+          }, function () {
+              geolocationErrorOccurred(true, popup, geolocationMap.getCenter());
+          });
+  body
+    div
+      div
+        nav.navbar.navbar-inverse(role='navigation', style='padding-left:130px;')
+          ul.nav.navbar-nav
+            li.active
+              a(href='/profile') Home
+              span.sr-only (current)
+            li
+              a(href='/about')
+                | About
+            li
+              a(href='/contact') Contact us
+
+
+      br
+      .jumbotron
+        p Welcome  #{user.name}
+          form(action='/registerGroup')
+            select(name='Select your group')
+              option(value='party') Party
+              option(value='concert') Coldplay
+            br
+            br
+            input(type='submit')
+
+
+
+
+

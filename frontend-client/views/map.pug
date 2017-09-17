@@ -1,0 +1,37 @@
+html
+    head
+        script(src='https://api.mqcdn.com/sdk/mapquest-js/v1.1.0/mapquest.js')
+        link(type='text/css', rel='stylesheet', href='https://api.mqcdn.com/sdk/mapquest-js/v1.1.0/mapquest.css')
+        script(src='https://unpkg.com/leaflet.markercluster@1.0.6/dist/leaflet.markercluster.js')
+        link(type='text/css', rel='stylesheet', href='https://unpkg.com/leaflet.markercluster@1.0.6/dist/MarkerCluster.css')
+        link(type='text/css', rel='stylesheet', href='https://unpkg.com/leaflet.markercluster@1.0.6/dist/MarkerCluster.Default.css')
+        script(type='text/javascript').
+            window.onload = function() {
+                L.mapquest.key = 'QJ6bzDZBiAvL3KcmIrfsc7JujZPUsDiQ';
+                var baseLayer = L.mapquest.tileLayer('map');
+
+                var map = L.mapquest.map('map', {
+                    center: L.latLng(37.7749, -122.4194),
+                    layers: baseLayer,
+                    zoom: 13
+                });
+
+                var markers = L.markerClusterGroup();
+                var addressPoints = #{locations};
+                    console.log(addressPoints);
+                for (var i = 0; i < addressPoints.length; i++) {
+                    var addressPoint = addressPoints[i];
+                    var marker = L.marker(addressPoint, {
+                        title: 'person',
+                        icon: L.mapquest.icons.marker()
+                    });
+                    marker.bindPopup('person');
+                    markers.addLayer(marker);
+                }
+
+                map.addLayer(markers);
+
+                map.addControl(L.mapquest.control());
+            }
+    body(style='border: 0; margin: 0;')
+        #map(style='width: 100%; height: 530px;')
